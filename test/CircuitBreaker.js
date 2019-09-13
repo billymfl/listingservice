@@ -10,19 +10,19 @@ const sleep = (ms) => {
 
 describe('CircuitBreaker', function() {
   let circuitBreaker;
-  const ft = 1;
-  const cdp = 2;
-  const rt = 2;
+  const failureThreshold = 1;
+  const cooldownPeriod = 2;
+  const requestTimeout = 2;
 
   before(function() {
-    const config = {failureThreshold: ft, cooldownPeriod: cdp, requestTimeout: rt};
+    const config = {failureThreshold, cooldownPeriod, requestTimeout};
     circuitBreaker = new CircuitBreaker(config);
   });
 
   it('should initialize with custom settings', function() {
-    assert.equal(circuitBreaker.getFailureThreshold(), ft, 'failure threshold');
-    assert.equal(circuitBreaker.getCooldownPeriod(), cdp, 'cooldown period');
-    assert.equal(circuitBreaker.getRequestTimeout(), rt, 'request timeout');
+    assert.equal(circuitBreaker.getFailureThreshold(), failureThreshold, 'failure threshold');
+    assert.equal(circuitBreaker.getCooldownPeriod(), cooldownPeriod, 'cooldown period');
+    assert.equal(circuitBreaker.getRequestTimeout(), requestTimeout, 'request timeout');
   });
 
   it('should set a new failure threshold setting', function() {

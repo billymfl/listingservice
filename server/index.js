@@ -15,7 +15,7 @@ const HapiSwagger = require('hapi-swagger');
 const Inert = require('@hapi/inert');
 const Vision = require('@hapi/vision');
 const routes = require('../modules/routes');
-// load the config
+const {app} = require('../modules/app');
 const {NODE_ENV, APPNAME, VERSION, PORT, HOST, _error} = require('../config');
 
 // if there is a missing required or misconfigured env vars then we should exit
@@ -52,6 +52,7 @@ const init = async () => {
   if (!module.parent) {
     try {
       await server.start();
+      app.init();
     } catch (err) {
       console.error(`Server startup error: ${err.message}`);
     }
@@ -59,7 +60,6 @@ const init = async () => {
   }
 
   server.route(routes);
-  // other init...
 };
 
 process.on('unhandledRejection', async (err) => {

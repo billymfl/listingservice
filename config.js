@@ -22,6 +22,8 @@ exports.debug = require('debug')(exports.APPNAME);
 const schema = Joi.object().keys({
   PORT: Joi.number().integer().min(80).max(65535).default(80),
   HOST: Joi.string().hostname().default('0.0.0.0'),
+  REDIS_URL: Joi.string().hostname().required(),
+  REDIS_PORT: Joi.number().integer().default(6379),
 });
 
 // if there is a validation error set _error, else assign env vars. usually we should exit on error.

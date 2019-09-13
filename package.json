@@ -1,15 +1,15 @@
 {
-  "name": "simple-microservices-template",
+  "name": "listingservice",
   "version": "1.0.0",
-  "description": "App description",
+  "description": "Microservice to list available chat rooms for Chat Server app",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test HOST=0.0.0.0 PORT=88 nyc ./node_modules/mocha/bin/mocha --exit",
+    "test": "./mocha-test.sh",
     "start": "node server"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/billymfl/simple-microservices-template.git"
+    "url": "git+https://github.com/billymfl/listingservice.git"
   },
   "keywords": [
     "microservice"
@@ -17,15 +17,16 @@
   "author": "Billy Marin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/billymfl/simple-microservices-template/issues"
+    "url": "https://github.com/billymfl/listingservice/issues"
   },
-  "homepage": "https://github.com/billymfl/simple-microservices-template#readme",
+  "homepage": "https://github.com/billymfl/listingservice#readme",
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^6.3.0",
     "eslint-config-google": "^0.14.0",
     "mocha": "^6.2.0",
-    "nyc": "^14.1.1"
+    "nyc": "^14.1.1",
+    "redis-mock": "^0.46.0"
   },
   "dependencies": {
     "@hapi/hapi": "^18.3.2",
@@ -34,6 +35,7 @@
     "axios": "^0.19.0",
     "debug": "^4.1.1",
     "dotenv": "^8.1.0",
-    "hapi-swagger": "^10.1.1"
+    "hapi-swagger": "^10.1.1",
+    "redis": "^2.8.0"
   }
 }
