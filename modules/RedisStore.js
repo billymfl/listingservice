@@ -41,9 +41,7 @@ class RedisStore extends Storable {
    * @return {boolean}
    */
   async save(key, data, expiration) {
-    console.log('TCL: RedisStore -> save -> this.redis', this.redis);
     await this.redis.setex(key, expiration, data);
-
     return true;
   }
 

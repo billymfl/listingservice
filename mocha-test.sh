@@ -9,4 +9,4 @@ HOST=0.0.0.0 \
 PORT=88 \
 REDIS_URL=0.0.0.0 \
 MONGO_URL=0.0.0.0 \
-nyc ./node_modules/mocha/bin/mocha --exit --grep $1
+nyc mocha --exit --grep $1
