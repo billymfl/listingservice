@@ -1,6 +1,6 @@
 const chai = require('chai');
 const assert = chai.assert;
-const redis = require('../modules/redis');
+const redis = require('./redisMock');
 const RedisStore = require('../modules/RedisStore');
 const cache = require('../modules/cache');
 
@@ -22,9 +22,10 @@ describe('Cache', function() {
   });
 
   it('should save a key', async function() {
-    await cacheStore.save(key, data, ttl);
+    const bool = await cacheStore.save(key, data, ttl);
+    assert.equal(bool, true);
     const val = await cacheStore.get(key);
-    assert.equal(val, data, 'failed to get set key');
+    assert.equal(val, data, 'failed to get saved key');
   });
 
   it('should get the timeLeft', async function() {
