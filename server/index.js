@@ -39,6 +39,7 @@ const swaggerOptions = {
 };
 
 const init = async () => {
+  // register swagger items. Adds a route to /documentation
   await server.register([
     Inert,
     Vision,

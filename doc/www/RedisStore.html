@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Cache</title>
+    <title>JSDoc: Class: RedisStore</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Cache</h1>
+    <h1 class="page-title">Class: RedisStore</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Cache<span class="signature">(config)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>RedisStore<span class="signature">(config)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Cache class</div>
+            <div class="class-description">RedisStore class</div>
         
     
 </header>
@@ -45,16 +45,12 @@
     
 
     
-    <h4 class="name" id="Cache"><span class="type-signature"></span>new Cache<span class="signature">(config)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="RedisStore"><span class="type-signature"></span>new RedisStore<span class="signature">(config)</span><span class="type-signature"></span></h4>
     
 
     
 
 
-
-<div class="description">
-    Cache contructor
-</div>
 
 
 
@@ -105,7 +101,7 @@
 
             
 
-            <td class="description last">object to inject the storage system to be used</td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -146,7 +142,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache.js.html">cache.js</a>, <a href="cache.js.html#line19">line 19</a>
+        <a href="RedisStore.js.html">RedisStore.js</a>, <a href="RedisStore.js.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -206,10 +202,6 @@
     
 
 
-
-<div class="description">
-    Gets value for a key
-</div>
 
 
 
@@ -301,7 +293,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache.js.html">cache.js</a>, <a href="cache.js.html#line52">line 52</a>
+        <a href="RedisStore.js.html">RedisStore.js</a>, <a href="RedisStore.js.html#line50">line 50</a>
     </li></ul></dd>
     
 
@@ -322,6 +314,21 @@
 
 
 
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">Error</span>
+
+
+    
+    </div>
+
+
+    
 
 
 <h5>Returns:</h5>
@@ -365,7 +372,7 @@
 
 
 <div class="description">
-    Removes a key
+    Removes a key or keys
 </div>
 
 
@@ -417,7 +424,7 @@
 
             
 
-            <td class="description last">name</td>
+            <td class="description last">names</td>
         </tr>
 
     
@@ -458,7 +465,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache.js.html">cache.js</a>, <a href="cache.js.html#line65">line 65</a>
+        <a href="RedisStore.js.html">RedisStore.js</a>, <a href="RedisStore.js.html#line64">line 64</a>
     </li></ul></dd>
     
 
@@ -520,10 +527,6 @@
     
 
 
-
-<div class="description">
-    Save a value with key and expiration time
-</div>
 
 
 
@@ -661,7 +664,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache.js.html">cache.js</a>, <a href="cache.js.html#line43">line 43</a>
+        <a href="RedisStore.js.html">RedisStore.js</a>, <a href="RedisStore.js.html#line40">line 40</a>
     </li></ul></dd>
     
 
@@ -814,7 +817,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cache.js.html">cache.js</a>, <a href="cache.js.html#line74">line 74</a>
+        <a href="RedisStore.js.html">RedisStore.js</a>, <a href="RedisStore.js.html#line74">line 74</a>
     </li></ul></dd>
     
 
@@ -835,6 +838,21 @@
 
 
 
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        
+<span class="param-type">Error</span>
+
+
+    
+    </div>
+
+
+    
 
 
 <h5>Returns:</h5>

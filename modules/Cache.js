@@ -1,10 +1,16 @@
 /**
- * A class to represent a Cache using redis
+ * A class to represent a Cache
+ *
+ * *Usage:
+ * const cache = require('./cache');
+ * cons redisClient = ....
+ * const cacheStore = cache({store: redisClient});
+ * await cacheStore.save('test', 'value);
+ * await cacheStore.del('test');
+ *
  * @class
  *
- * @requires     NPM:redis
- * @property instance the instance of the class
- * @property redisClient the instance of the redisClient
+ * @property store the instance that will act as the storage
  */
 
 /**
@@ -14,69 +20,73 @@ class Cache {
   /** Cache contructor
    * @constructor
    * @private
-   * @param {object} redis object to inject
+   * @param {object} config object to inject the storage system to be used
     */
-  constructor() {
-    this.redisClient;
-  }
-
-  /**
- * @param  {object} redis client to use
- * @return {object} this
- */
-  getInstance(redis) {
-    if (!this.redisClient) {
-      this.redisClient = redis;
+  constructor(config) {
+    if (!config) {
+      throw new Error('Must pass in a config to the constructor');
     }
-    return this;
+
+    if (!config.store) {
+      throw new Error('Must pass in a store in the config to the constructor (config.store)');
+    }
+
+    this.store = config.store;
   }
 
-  /**
+  /** Save a value with key and expiration time
    * @param  {string} key name
-   * @param  {int} expiry time to live
    * @param  {string} data to store
+   * @param  {int} expiration time to live
    * @return {boolean}
    */
-  async save(key, expiry, data) {
-    await this.redisClient.setex(key, expiry, data);
+  async save(key, data, expiration) {
+    await this.store.save(key, data, expiration);
     return true;
   }
 
-  /**
+  /** Gets value for a key
    * @param  {string} key
-   * @return {string|boolean}
+   * @return {object} the value at the key
    */
   async get(key) {
     try {
-      const value = await this.redisClient.get(key);
+      const value = await this.store.get(key);
       return value;
     } catch (err) {
-      debug('TCL: Cache -> get -> err', err);
-      return false;
+      return null;
     }
   }
 
-  /**
-   * @param  {string} key
-   */
-  async timeToLive(key) {
-    try {
-      const value = await this.redisClient.ttl(key);
-      return value;
-    } catch (err) {
-      debug('TCL: Cache -> timeToLive -> err', err);
-      return false;
-    }
-  }
-
-  /**
+  /** Removes a key
    * @param  {string} key name
    * @return {integer} number of keys removed
    */
-  async del(...keys) {
-    const i = await this.redisClient.del(keys);
-    return i;
+  async remove(key) {
+    const n = await this.store.remove(key);
+    return n;
+  }
+
+  /** timeLeft returns the seconds key has left to live
+   * @param  {string} key
+   * @return {integer} seconds left for the key
+   */
+  async timeLeft(key) {
+    try {
+      const value = await this.store.timeLeft(key);
+      return value;
+    } catch (err) {
+      return -1;
+    }
   }
 }
 
-module.exports = new Cache();
+/** Cache builder
+ * @param  {object} config
+ * @return {object} instance of Cache
+ */
+function cache(config) {
+  return new Cache(config);
+}
+
+module.exports = cache;

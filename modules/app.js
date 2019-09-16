@@ -2,25 +2,27 @@
   * @module app
 */
 
-const Redis = require('./RedisClient');
-const _Cache = require('./Cache');
+const redis = require('./redis');
+const _cache = require('./cache');
+const RedisStore = require('./RedisStore');
 
 // reference to the promisfied redisClient
 let redisClient;
-let Cache;
+let cache;
 
 /** initRedis sets the redisClient variable
  * @private
  */
 function initRedis() {
-  redisClient = Redis.getInstance();
+  redisClient = redis.getInstance();
 }
 
 /**
  * @private
  */
 function initCache() {
-  Cache = _Cache.getInstance(redisClient);
+  const redisStore = new RedisStore({redis: redisClient});
+  cache = _cache({store: redisStore});
 }
 
 /** app object so init can be called
@@ -32,4 +34,4 @@ const app = {
   },
 };
 
-module.exports = {app, redisClient, Cache};
+module.exports = {app, redisClient, cache};
