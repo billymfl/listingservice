@@ -1,7 +1,7 @@
 /**
  * RedisStore class implementing the Storable interface
  *
- * Usage:
+ * @example
  * const redis = require('./redis');
  * const client = redis.getInstance();
  * const redisStore = new RedisStore({redis: client});
@@ -21,13 +21,16 @@ class RedisStore extends Storable {
      */
   constructor(config) {
     super();
+
     if (!config) {
       throw new Error('Must pass in a config to the constructor');
     }
+
     if (!config.redis) {
       // eslint-disable-next-line max-len
       throw new Error('Must pass in a redis client in the config to the constructor (config.redis)');
     }
+
     this.redis = config.redis;
   }
 

@@ -5,6 +5,9 @@
  * @property instance the instance of the class
  */
 
+/*
+ @private
+ */
 let instance;
 
 /**

@@ -24,6 +24,8 @@ const schema = Joi.object().keys({
   HOST: Joi.string().hostname().default('0.0.0.0'),
   REDIS_URL: Joi.string().hostname().required(),
   REDIS_PORT: Joi.number().integer().default(6379),
+  MONGO_URL: Joi.string().hostname().required(),
+  MONGO_PORT: Joi.number().integer().default(27017),
 });
 
 // if there is a validation error set _error, else assign env vars. usually we should exit on error.

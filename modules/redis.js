@@ -1,10 +1,12 @@
 /**
  * A class to represent the redis client with promisified methods.
- * Usage:
+ * @example
  * const redis = require('./redis');
  * const client = redis.getInstance();
  *
  * @class
+ *
+ * @property _client object to store the promisified redis client
  *
  * @requires     NPM:redis
  */

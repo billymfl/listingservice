@@ -1,7 +1,7 @@
 /**
  * A class to represent a Cache
  *
- * *Usage:
+ * @example
  * const cache = require('./cache');
  * cons redisClient = ....
  * const cacheStore = cache({store: redisClient});
