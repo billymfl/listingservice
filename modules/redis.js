@@ -13,7 +13,7 @@
 
 const _redis = require('redis');
 const {promisify} = require('util');
-const {REDIS_PORT, REDIS_HOST, debug} = require('../config');
+const {REDIS_URL, debug} = require('../config');
 
 /**
  * Redis class
@@ -31,10 +31,7 @@ class Redis {
    */
   getInstance() {
     if (!this._client) {
-      const client = _redis.createClient({
-        port: REDIS_PORT,
-        host: REDIS_HOST,
-      });
+      const client = _redis.createClient(REDIS_URL);
 
       client.on('ready', () => {
         debug('Redis is ready');
@@ -42,10 +39,12 @@ class Redis {
 
       client.on('error', (err) => {
         console.error('Redis error', err);
+        process.exit(1);
       });
 
       this._client = {};
       this._client.get = promisify(client.get).bind(client);
+      this._client.set = promisify(client.set).bind(client);
       this._client.setex = promisify(client.setex).bind(client);
       this._client.ttl = promisify(client.ttl).bind(client);
       this._client.del = promisify(client.del).bind(client);

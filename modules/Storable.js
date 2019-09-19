@@ -1,5 +1,5 @@
 /**
- * A class to represent the interface of a Storage class
+ * A class to represent the interface of a Storable class
  * @class
  *
  */
@@ -35,7 +35,7 @@ class Storable {
   }
 
   /*
-    async save(key string, value object, expiration int) bool
+    async save(key string, value object, [expiration int]) bool
     async get(key string) object, throws Error
     async remove(key string) bool
     async timeLeft(key string) int, throws Error

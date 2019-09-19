@@ -6,6 +6,7 @@ const redis = require('./redis');
 const _cache = require('./cache');
 const RedisStore = require('./RedisStore');
 
+
 // reference to the promisfied redisClient
 let redisClient;
 let cache;

@@ -41,7 +41,11 @@ class RedisStore extends Storable {
    * @return {boolean}
    */
   async save(key, data, expiration) {
-    await this.redis.setex(key, expiration, data);
+    if (expiration !== undefined) {
+      await this.redis.setex(key, expiration, data);
+    } else {
+      await this.redis.set(key, data);
+    }
     return true;
   }
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app.js</title>
+    <title>JSDoc: Source: mongo.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app.js</h1>
+    <h1 class="page-title">Source: mongo.js</h1>
 
     
 
@@ -26,44 +26,40 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/* Other app initializations
-  * @module app
-*/
-
-const redis = require('./redis');
-const _cache = require('./cache');
-const RedisStore = require('./RedisStore');
-
-
-// reference to the promisfied redisClient
-let redisClient;
-let cache;
-
-/** initRedis sets the redisClient variable
- * @private
- */
-function initRedis() {
-  redisClient = redis.getInstance();
-}
+            <pre class="prettyprint source linenums"><code>const MongoClient = require('mongodb').MongoClient;
+const {MONGO_URL, MONGO_DB} = require('../config');
 
 /**
- * @private
+ * Mongo class
  */
-function initCache() {
-  const redisStore = new RedisStore({redis: redisClient});
-  cache = _cache({store: redisStore});
+class Mongo {
+  /**
+   * @constructor
+   */
+  constructor() {
+    this.db;
+  }
+
+  /** getInstance returns the instance of redis client or initializes it first
+   * @return {object} reference to promisified redis client
+   * @throws {Error}
+   */
+  async getInstance() {
+    if (!this.db) {
+      const client = new MongoClient(MONGO_URL, {useNewUrlParser: true});
+
+      try {
+        await client.connect();
+        this.db = client.db(MONGO_DB);
+      } catch (err) {
+        throw new Error(err);
+      }
+    }
+    return this.db;
+  }
 }
 
-/** app object so init can be called
- */
-const app = {
-  init: () => {
-    initRedis();
-    initCache();
-  },
-};
-
-module.exports = {app, redisClient, cache};
+module.exports = new Mongo();
 </code></pre>
         </article>
     </section>
